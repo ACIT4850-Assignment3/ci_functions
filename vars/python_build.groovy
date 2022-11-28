@@ -42,7 +42,9 @@ def call(dockerRepoName, imageName, portNum) {
 
                     sh "ssh -o StrictHostKeyChecking=no kafka@acit3855-kafka-lab6a.eastus.cloudapp.azure.com"
                     sh "docker stop ${dockerRepoName} || true && docker rm ${dockerRepoName} || true"
-                    sh "docker run -d -p ${portNum}:${portNum} --name ${dockerRepoName} ${dockerRepoName}:latest"
+                    // sh "docker run -d -p ${portNum}:${portNum} --name ${dockerRepoName} ${dockerRepoName}:latest"
+                    sh "cd deployment"
+                    sh "docker-compose up -d"
                 }
             }
         }                                                                                                                               
