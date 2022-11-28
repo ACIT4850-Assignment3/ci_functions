@@ -38,7 +38,7 @@ def call(dockerRepoName, imageName, portNum) {
                 expression {params.DEPLOY}
             }
             steps {
-                withCredentials([string(credentialsId: 'rj-kafka-key', variable: 'SSH_KEY')]) {
+                withCredentials([file(credentialsId: 'rj-kafka-pem', variable: 'SSH_KEY')]) {
 
                     sh "ssh -i '$SSH_KEY' kafka@acit3855-kafka-lab6a.eastus.cloudapp.azure.com"
                     sh "docker stop ${dockerRepoName} || true && docker rm ${dockerRepoName} || true"
