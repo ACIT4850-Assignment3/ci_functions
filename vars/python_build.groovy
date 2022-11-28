@@ -38,7 +38,7 @@ def call(dockerRepoName, imageName, portNum) {
                 expression {params.DEPLOY}
             }
             steps {
-                sh "ssh -i .\Kafka_key.pem kafka@acit3855-kafka-lab6a.eastus.cloudapp.azure.com"
+                sh "ssh -i Kafka_key.pem kafka@acit3855-kafka-lab6a.eastus.cloudapp.azure.com"
                 sh "docker stop ${dockerRepoName} || true && docker rm ${dockerRepoName} || true"
                 sh "docker run -d -p ${portNum}:${portNum} --name ${dockerRepoName} ${dockerRepoName}:latest"
             }
