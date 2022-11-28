@@ -38,9 +38,9 @@ def call(dockerRepoName, imageName, portNum) {
                 expression {params.DEPLOY}
             }
             steps {
-                withCredentials([file(credentialsId: 'rj-kafka-pem', variable: 'SSH_KEY')]) {
+                sshagent(credentials : ['rj-3855']) {
 
-                    sh "ssh -i '$SSH_KEY' kafka@acit3855-kafka-lab6a.eastus.cloudapp.azure.com"
+                    sh "ssh -o StrictHostKeyChecking=no kafka@acit3855-kafka-lab6a.eastus.cloudapp.azure.com"
                     sh "docker stop ${dockerRepoName} || true && docker rm ${dockerRepoName} || true"
                     sh "docker run -d -p ${portNum}:${portNum} --name ${dockerRepoName} ${dockerRepoName}:latest"
                 }
