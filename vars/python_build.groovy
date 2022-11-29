@@ -40,7 +40,7 @@ def call(dockerRepoName, imageName, portNum) {
             steps {
                 sshagent(credentials : ['rj-3855']) {
 
-                    sh "ssh -o StrictHostKeyChecking=no kafka@acit3855-kafka-lab6a.eastus.cloudapp.azure.com 'cd deployment; docker-compose down ; docker-compose up -d'"
+                    sh "ssh -o StrictHostKeyChecking=no kafka@acit3855-kafka-lab6a.eastus.cloudapp.azure.com 'cd deployment; docker-compose down ;docker-compose pull ;docker-compose up -d --build'"
                     // sh "docker stop ${dockerRepoName} || true && docker rm ${dockerRepoName} || true"
                     // sh "docker run -d -p ${portNum}:${portNum} --name ${dockerRepoName} ${dockerRepoName}:latest"
                    
